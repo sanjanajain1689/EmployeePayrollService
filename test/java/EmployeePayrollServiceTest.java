@@ -65,6 +65,13 @@ public class EmployeePayrollServiceTest {
         Files.newDirectoryStream(playPath, path -> path.toFile().isFile()
                 && path.toString().startsWith("temp"))
                 .forEach(System.out::println);
+    }
+
+    @Test
+    public void givenADirWhenWatchedListsAllTheActivities() throws IOException {
+        Path dir = Paths.get(HOME + "/" + PLAY_WITH_NIO);
+        Files.list(dir).filter(Files::isRegularFile).forEach(System.out::println);
+        Assert.assertTrue(new JavaWatchService(dir).processEvents());
 
     }
 }
